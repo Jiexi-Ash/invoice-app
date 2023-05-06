@@ -1,9 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
+
 import Navbar from "~/components/Navbar";
 
 import { api } from "~/utils/api";
+import Invoice from "~/components/Invoice/Invoice";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -16,7 +17,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]"></main>
+      <main className="flex min-h-screen flex-col bg-secondaryBlack">
+        <Invoice />
+      </main>
     </>
   );
 };
