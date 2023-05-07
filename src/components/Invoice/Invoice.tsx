@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
@@ -6,6 +6,9 @@ import Image from "next/image";
 
 import EmptyIllustration from "../../../public/assets/images/illustration-empty.svg";
 import { data } from "~/data";
+
+import { AnimatePresence } from "framer-motion";
+import Form from "./Form";
 
 type InvoiceData = {
   id: string;
@@ -49,17 +52,36 @@ type InvoiceListProps = Omit<
 >[];
 
 function Invoice() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isOpen]);
+
   return (
     <>
-      <InvoiceHeader />
+      <InvoiceHeader isOpen={isOpen} setIsOpen={setIsOpen} />
       {data.length === 0 ? <InvoiceEmpty /> : <InvoiceList invoices={data} />}
+      <AnimatePresence mode="wait" initial={false} onExitComplete={() => null}>
+        {isOpen && <Form setIsOpen={setIsOpen} isOpen={isOpen} />}
+      </AnimatePresence>
     </>
   );
 }
 
 export default Invoice;
 
-const InvoiceHeader = () => {
+const InvoiceHeader = ({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <div className="mt-8 flex w-full items-center justify-between px-6">
       <div className="flex flex-col">
@@ -77,13 +99,16 @@ const InvoiceHeader = () => {
           </div>
           <ChevronDownIcon className="h-4 w-4 text-primaryPurple" />
         </div>
-        <div className="flex items-center justify-center space-x-2 rounded-3xl bg-primaryPurple p-2">
+        <div
+          className="flex items-center justify-center space-x-2 rounded-3xl bg-primaryPurple p-2"
+          onClick={() => setIsOpen(true)}
+        >
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
             <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M6.313 10.023v-3.71h3.71v-2.58h-3.71V.023h-2.58v3.71H.023v2.58h3.71v3.71z"
                 fill="#7C5DFA"
-                fill-rule="nonzero"
+                fillRule="nonzero"
               />
             </svg>
           </div>
@@ -180,9 +205,7 @@ const InvoiceCard = ({
 const Status = ({ status }: { status: string }) => {
   return (
     <div
-      className={`${
-        status === "paid" ? "bg-[#33D69F]/10 text-[#33D69F]" : "bg-red-500"
-      }
+      className={`${status === "paid" ? "bg-[#33D69F]/10 text-[#33D69F]" : ""}
       ${status === "pending" ? "bg-[#FF8F00]/10 text-[#FF8F00] " : ""}
       ${status === "draft" ? "bg-[#DFE3FA]/10 text-lavender" : ""}
       flex h-[40px] w-[104px] items-center justify-center rounded-lg text-xs font-bold tracking-[-0.25px]`}
