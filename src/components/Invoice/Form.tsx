@@ -165,7 +165,7 @@ function Form({
           <h2 className="px-6 text-2xl tracking-[-0.5px] text-white">
             New Invoice
           </h2>
-          {/* Bill From */}
+
           <div className="mt-4 px-6">
             <div className="text-xs tracking-[-0.25px] text-primaryPurple">
               Bill From
