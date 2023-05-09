@@ -179,7 +179,7 @@ function Form({
               <Input label="Country" type="text" {...senderCountry} />
             </div>
           </div>
-          {/* Bill To */}
+
           <div className="mt-4 px-6">
             <div className="mb-6 text-xs tracking-[-0.25px] text-primaryPurple">
               Bill To
@@ -193,7 +193,6 @@ function Form({
             </div>
             <Input label="Country" type="text" {...clientCountry} />
 
-            {/* Invoice */}
             <div className="mt-4">
               <div className="text-xs tracking-[-0.25px] text-primaryPurple">
                 Invoice Date
