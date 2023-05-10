@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import EmptyIllustration from "../../../public/assets/images/illustration-empty.svg";
 import { data } from "~/data";
@@ -52,6 +53,7 @@ type InvoiceListProps = Omit<
 >[];
 
 function Invoice() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -60,6 +62,13 @@ function Invoice() {
     } else {
       document.body.style.overflow = "unset";
     }
+
+    if (isOpen) {
+      void router.push("/", "/invoice/new", { shallow: true });
+    } else {
+      void router.push("/", "/", { shallow: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
