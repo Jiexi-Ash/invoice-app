@@ -21,6 +21,9 @@ export default {
       maxWidth: {
         "8xl": "1400px",
       },
+      fontFamily: {
+        spartan: ["Spartan", "sans-serif"],
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
