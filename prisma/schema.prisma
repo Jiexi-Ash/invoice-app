@@ -26,9 +26,12 @@ model Invoice {
     senderCountry  String   @map("sender_country")
     senderPostCode String   @map("sender_post_code")
     status         Status   @default(DRAFT)
-    paymentTerms   String   @map("payment_terms")
+    paymentTerms   Int      @map("payment_terms")
     paymentDue     String   @map("payment_due")
-    Item           Item[]
+    item           Item[]
+    userId         String   @map("user_id") @db.ObjectId
+
+    @@index([userId])
 }
 
 model Item {

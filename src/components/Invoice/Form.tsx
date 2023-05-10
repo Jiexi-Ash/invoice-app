@@ -14,7 +14,7 @@ export type InvoiceFormProps = {
   clientCountry: string;
   clientPostCode: string;
   description: string;
-  paymentTerms: string;
+  paymentTerms: number;
   senderStreet: string;
   senderCity: string;
   senderCountry: string;
@@ -58,7 +58,7 @@ function Form({
     clientCountry: "",
     clientPostCode: "",
     description: "",
-    paymentTerms: "",
+    paymentTerms: 1,
     senderStreet: "",
     senderCity: "",
     senderCountry: "",
